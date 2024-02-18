@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a6435d4d8eabe7a449424e084f286857
+guid: e64373ea114807a41a76afaa020d4179
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,13 +7,28 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Glass
-    second: {fileID: 2100000, guid: 7cab946ef4acd6d4895c2d66b70b7085, type: 2}
+      name: Bottle glass
+    second: {fileID: 2100000, guid: cede5318942983b479c452215e77d9c3, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Measures
-    second: {fileID: 2100000, guid: ec5da67b797440f4eaa79aef95cddb29, type: 2}
+      name: Glass
+    second: {fileID: 2100000, guid: cede5318942983b479c452215e77d9c3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metil
+    second: {fileID: 2100000, guid: 661a1c5b65761be4391c706441d6457a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Red plastic
+    second: {fileID: 2100000, guid: 9e5ef948041c92245b90baf7e26efc4d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tape Metil
+    second: {fileID: 2100000, guid: 267e725fc144bec4186e26fef9fc6906, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
