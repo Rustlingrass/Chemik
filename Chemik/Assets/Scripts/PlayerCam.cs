@@ -13,7 +13,8 @@ public class PlayerCam : MonoBehaviour
     [Header("Hold Object")]
     public Transform objectHolder;
     public LayerMask isPickable;
-    GameObject holdingObject = null;
+    public LayerMask isPuttable;
+    public GameObject holdingObject = null;
     Rigidbody holdingrb;
     bool holding;
     bool interacting;
@@ -21,7 +22,7 @@ public class PlayerCam : MonoBehaviour
     float xRotation;
     float yRotation;
     Ray ray;
-    RaycastHit hit;
+    RaycastHit hitHold, hitPut;
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -29,35 +30,77 @@ public class PlayerCam : MonoBehaviour
     }
     private void Update()
     {
-        interacting = Physics.Raycast(ray,out hit, 5, isPickable);
+        interacting = Physics.Raycast(ray, out hitHold, 10, isPickable);
         ray = new Ray(transform.position, transform.forward);
         RotateCamera();
         PickUp();
+        if (holding)
+        {
+            PutHolding();
+        }
+        else if (!holding)
+        {
+            PickPutted();
+        }
         DebuggingRay();
     }
     private void PickUp()
     {
         if (interacting && Input.GetKeyDown(KeyCode.E) && !holding)
         {
-            holdingObject = Instantiate(hit.transform.gameObject, objectHolder);
+            holdingObject = hitHold.transform.gameObject;
             holdingObject.transform.SetParent(objectHolder);
             holdingObject.transform.localPosition = Vector3.zero;
             holdingObject.transform.rotation = Quaternion.identity;
             holdingrb = holdingObject.GetComponent<Rigidbody>();
+            
             //changing holding objects's rigidbody
             holdingrb.isKinematic = true;
+            holdingObject.GetComponent<Collider>().enabled = false;
             holding = true;
 
-            //Destroy the previous object
-            Destroy(hit.transform.gameObject);
-
         }
-        else if (holding && Input.GetKeyDown(KeyCode.E)) 
+        else if (holding && Input.GetKeyDown(KeyCode.Q)) 
         {
             //Drop the object
+            holdingObject.GetComponent<Collider>().enabled = true;
             holdingrb.isKinematic = false;
             holdingObject.transform.SetParent(null);
             holding = false;
+            holdingObject = null;
+        }
+    }
+    private void PutHolding()
+    {
+        if (Physics.Raycast(ray, out hitPut, 10, isPuttable) && holdingObject != null && Input.GetKeyDown(KeyCode.E))
+        {
+            holdingObject.transform.SetParent(hitPut.transform);
+            holdingObject.GetComponent<Collider>().enabled = true;
+            holdingrb = holdingObject.gameObject.GetComponent<Rigidbody>();
+            holdingrb.isKinematic = true;
+
+            holdingObject.transform.localPosition = Vector3.zero;
+            holdingObject.transform.rotation = Quaternion.identity;
+            
+            holdingObject = null;
+            holding = false;
+        }
+    }
+    private void PickPutted()
+    {
+        if (Physics.Raycast(ray, out hitPut, 10, isPuttable) && holdingObject == null && Input.GetKeyDown(KeyCode.E))
+        {
+            holdingObject = hitPut.transform.GetChild(0).gameObject;
+            holdingObject.transform.SetParent(objectHolder.transform);
+            
+            holdingrb = holdingObject.gameObject.GetComponent<Rigidbody>();
+            holdingrb.isKinematic = true;
+            holdingObject.GetComponent<Collider>().enabled = false;
+
+            holdingObject.transform.localPosition = Vector3.zero;
+            holdingObject.transform.rotation = Quaternion.identity;
+            
+            holding = true;
         }
     }
     private void RotateCamera()
