@@ -129,4 +129,9 @@ public class PlayerCam : MonoBehaviour
             Debug.DrawRay(transform.position, transform.forward * 4, Color.red);
         }
     }
+    public bool CheckingPutted() 
+    {
+        if (Physics.Raycast(ray, 10, isPickable)) return true;
+        else return false;
+    }
 }
