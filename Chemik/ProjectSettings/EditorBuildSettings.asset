@@ -6,6 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: f49a17b79a901b64a89e9c9ffd507481
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Laboratory/BasicExperiment.unity
+    guid: c9baf7c0ad98c9b4fbc21787cdd2788c
+  - enabled: 1
+    path: Assets/Scenes/Laboratory/AcidsExperiment.unity
+    guid: edff350b5c1db1445aeca0320676c91e
+  - enabled: 1
+    path: Assets/Scenes/Laboratory/AmphotericExperiment.unity
+    guid: 06ae72197fea673469f6314ef84810c5
   m_configObjects: {}
