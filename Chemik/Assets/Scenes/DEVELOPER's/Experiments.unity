@@ -1234,9 +1234,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0978037eaa925d4c99e2d0a1456dcad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCam: {fileID: 2057571044}
+  keyModel: {fileID: 1212777867}
   nextModel: {fileID: 6786912013678291466, guid: 6a04733e72e102f40b0ad4b2be54f23e,
     type: 3}
-  playerCam: {fileID: 2057571044}
   createdModel: {fileID: 0}
 --- !u!23 &1976984247
 MeshRenderer:
@@ -1322,8 +1323,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 9.747889, y: 2, z: 8.99293}
-  m_Center: {x: 1.2595165, y: 0, z: 0.766352}
+  m_Size: {x: 9, y: 2, z: 9}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2005410374
 PrefabInstance:
   m_ObjectHideFlags: 0

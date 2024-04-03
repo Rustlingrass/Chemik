@@ -5,24 +5,29 @@ using UnityEngine;
 
 public class PlayerCam : MonoBehaviour
 {
+    //outlining variables
+    Outline currentOutline;
+    bool outlinable;
+
     public float sensX;
     public float sensY;
-
     public Transform orientation;
+    float xRotation;
+    float yRotation;
 
     [Header("Hold Object")]
     public Transform objectHolder;
     public LayerMask isPickable;
     public LayerMask isPuttable;
-    public GameObject holdingObject = null;
+    public static GameObject holdingObject = null;
     Rigidbody holdingrb;
     bool holding;
     bool interacting;
 
-    float xRotation;
-    float yRotation;
+
+    //Raycasting in physics
     Ray ray;
-    RaycastHit hitHold, hitPut;
+    RaycastHit looking, hitPut;
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -30,10 +35,16 @@ public class PlayerCam : MonoBehaviour
     }
     private void Update()
     {
-        interacting = Physics.Raycast(ray, out hitHold, 10, isPickable);
+        interacting = Physics.Raycast(ray, out looking, 10, isPickable);
         ray = new Ray(transform.position, transform.forward);
+
+        //Camera movements
         RotateCamera();
+        
+        //Picking up all interactable objects
         PickUp();
+
+        //interaction with a place to put
         if (holding)
         {
             PutHolding();
@@ -42,13 +53,25 @@ public class PlayerCam : MonoBehaviour
         {
             PickPutted();
         }
+
+        //Outlining interactable objects
+        if (interacting && looking.transform.gameObject.TryGetComponent<Outline>(out currentOutline))
+        {
+            currentOutline.enabled = true;
+        } 
+        else if (!interacting && currentOutline != null)
+        {
+            currentOutline.enabled = false;
+        }
+
+        //Debug in editor
         DebuggingRay();
     }
     private void PickUp()
     {
         if (interacting && Input.GetKeyDown(KeyCode.E) && !holding)
         {
-            holdingObject = hitHold.transform.gameObject;
+            holdingObject = looking.transform.gameObject;
             holdingObject.transform.SetParent(objectHolder);
             holdingObject.transform.localPosition = Vector3.zero;
             holdingObject.transform.rotation = Quaternion.identity;
@@ -129,9 +152,9 @@ public class PlayerCam : MonoBehaviour
             Debug.DrawRay(transform.position, transform.forward * 4, Color.red);
         }
     }
-    public bool CheckingPutted() 
+    public bool CheckingInteractable() 
     {
-        if (Physics.Raycast(ray, 10, isPickable)) return true;
+        if (Physics.Raycast(ray, out looking,  10, isPickable)) return true;
         else return false;
     }
 }
