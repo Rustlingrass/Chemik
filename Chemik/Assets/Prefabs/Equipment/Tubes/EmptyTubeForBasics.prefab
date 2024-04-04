@@ -120,10 +120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0978037eaa925d4c99e2d0a1456dcad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2045905179961233948, guid: 2b2eb148a876ace46b0dd5c8ec707d8f, type: 3}
-  playerCam: {fileID: 0}
   keyModel: {fileID: 5953423717631558625, guid: 169f3ee5cd6fefa4d9104297a9ecc9cd,
     type: 3}
-  nextModel: {fileID: 4332897180383308807, guid: b01f5db3145a4344a814f38a52a3ffd6,
+  nextModel: {fileID: 2032810401056746788, guid: b01f5db3145a4344a814f38a52a3ffd6,
     type: 3}
   createdModel: {fileID: 0}
