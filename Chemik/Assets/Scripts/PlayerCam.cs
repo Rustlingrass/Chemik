@@ -6,8 +6,7 @@ using UnityEngine;
 public class PlayerCam : MonoBehaviour
 {
     //outlining variables
-    Outline currentOutline;
-    bool outlinable;
+    GameObject outlined;
 
     public float sensX;
     public float sensY;
@@ -17,8 +16,8 @@ public class PlayerCam : MonoBehaviour
 
     [Header("Hold Object")]
     public Transform objectHolder;
-    public LayerMask isPickable;
-    public LayerMask isPuttable;
+    public LayerMask interactable1;
+    public LayerMask interactable2;
     public static GameObject holdingObject = null;
     Rigidbody holdingrb;
     bool holding;
@@ -35,38 +34,51 @@ public class PlayerCam : MonoBehaviour
     }
     private void Update()
     {
-        interacting = Physics.Raycast(ray, out looking, 10, isPickable);
+        interacting = Physics.Raycast(ray, out looking, 10, interactable1);
         ray = new Ray(transform.position, transform.forward);
 
         //Camera movements
         RotateCamera();
-        
+
         //Picking up all interactable objects
         PickUp();
 
         //interaction with a place to put
         if (holding)
         {
-            PutHolding();
+            //PutHolding();
         }
         else if (!holding)
         {
-            PickPutted();
+            //PickPutted();
         }
 
         //Outlining interactable objects
-        if (interacting && looking.transform.gameObject.TryGetComponent<Outline>(out currentOutline))
-        {
-            currentOutline.enabled = true;
-        } 
-        else if (!interacting && currentOutline != null)
-        {
-            currentOutline.enabled = false;
-        }
+        Outliner();
 
         //Debug in editor
         DebuggingRay();
+        interacting = false;
     }
+
+    private void Outliner()
+    {
+        if (interacting)
+        {
+            if (!looking.transform.gameObject.TryGetComponent<Outline>(out _) && outlined == null)
+            {
+                looking.transform.gameObject.AddComponent<Outline>();
+                outlined = looking.transform.gameObject;
+                outlined.GetComponent<Outline>().OutlineColor = Color.white;
+            }
+        }
+        else if (!interacting && outlined != null)
+        {
+            Destroy(outlined.GetComponent<Outline>());
+            outlined = null;
+        }
+    }
+
     private void PickUp()
     {
         if (interacting && Input.GetKeyDown(KeyCode.E) && !holding)
@@ -91,9 +103,10 @@ public class PlayerCam : MonoBehaviour
             holdingObject.transform.SetParent(null);
             holding = false;
             holdingObject = null;
+            ChangeModel.thisOutline.enabled = false;
         }
     }
-    private void PutHolding()
+    /*private void PutHolding()
     {
         if (Physics.Raycast(ray, out hitPut, 10, isPuttable) && holdingObject != null && Input.GetKeyDown(KeyCode.E))
         {
@@ -108,8 +121,8 @@ public class PlayerCam : MonoBehaviour
             holdingObject = null;
             holding = false;
         }
-    }
-    private void PickPutted()
+    }*/
+    /*private void PickPutted()
     {
         if (Physics.Raycast(ray, out hitPut, 10, isPuttable) && holdingObject == null && Input.GetKeyDown(KeyCode.E))
         {
@@ -125,7 +138,7 @@ public class PlayerCam : MonoBehaviour
             
             holding = true;
         }
-    }
+    }*/
     private void RotateCamera()
     {
         //get mouse input
@@ -154,7 +167,7 @@ public class PlayerCam : MonoBehaviour
     }
     public bool CheckingInteractable() 
     {
-        if (Physics.Raycast(ray, out looking,  10, isPickable)) return true;
+        if (Physics.Raycast(ray, out looking,  10, interactable1)) return true;
         else return false;
     }
 }

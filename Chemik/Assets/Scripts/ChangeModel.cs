@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ChangeModel : MonoBehaviour
@@ -7,9 +8,11 @@ public class ChangeModel : MonoBehaviour
     public GameObject keyModel;
     public GameObject nextModel;
     public GameObject createdModel;
+    public static Outline thisOutline;
     // Start is called before the first frame update
     void Start()
     {
+        thisOutline = GetComponent<Outline>();
     }
 
     // Update is called once per frame
@@ -28,11 +31,17 @@ public class ChangeModel : MonoBehaviour
                 if (PlayerCam.holdingObject != null)
                 {
                     Debug.Log("1");
-                    if (PlayerCam.holdingObject.name == keyModel.name && Input.GetKeyDown(KeyCode.F))
+                    if (PlayerCam.holdingObject.name == keyModel.name)
                     {
-                        Debug.Log("2");
-                        createdModel = Instantiate(nextModel, transform.position, Quaternion.identity);
-                        Destroy(this.gameObject);
+                        thisOutline.enabled = true;
+                        if (Input.GetKeyDown(KeyCode.F))
+                        {
+                            Debug.Log("2");
+                            thisOutline.enabled = false;
+                            thisOutline = null;
+                            createdModel = Instantiate(nextModel, transform.position, Quaternion.identity);
+                            Destroy(this.gameObject);
+                        }
                     }
                 }
             }

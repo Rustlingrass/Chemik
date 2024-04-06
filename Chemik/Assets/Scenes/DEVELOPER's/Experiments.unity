@@ -1234,7 +1234,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0978037eaa925d4c99e2d0a1456dcad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCam: {fileID: 2057571044}
   keyModel: {fileID: 1212777867}
   nextModel: {fileID: 6786912013678291466, guid: 6a04733e72e102f40b0ad4b2be54f23e,
     type: 3}
@@ -1473,18 +1472,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65187de8dd4b9c14b93032db3aa825f8, type: 3}
---- !u!114 &2057571044 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5768797159924061915, guid: 2b2eb148a876ace46b0dd5c8ec707d8f,
-    type: 3}
-  m_PrefabInstance: {fileID: 6264821570331210354}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a44e207ccaf33e9448f5a2d9be97fcda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &6264821570331210354
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1547,6 +1534,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5768797159924061915, guid: 2b2eb148a876ace46b0dd5c8ec707d8f,
+        type: 3}
+      propertyPath: interactable.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3035841982071449425, guid: 2b2eb148a876ace46b0dd5c8ec707d8f, type: 3}
