@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -5,17 +6,21 @@ using UnityEngine;
 
 public class ChangeModel : MonoBehaviour
 {
+    public GameObject manager;
     public GameObject keyModel;
     public GameObject nextModel;
     public GameObject createdModel;
-    public static Outline thisOutline;
-    // Start is called before the first frame update
+
+
+    public static Outline thisOutline = null;
+    
+    
+    private static InteractionHints intHints;
     void Start()
     {
         thisOutline = GetComponent<Outline>();
+        intHints = manager.GetComponent<InteractionHints>();
     }
-
-    // Update is called once per frame
     void Update()
     {
 
@@ -30,15 +35,20 @@ public class ChangeModel : MonoBehaviour
 
                 if (PlayerCam.holdingObject != null)
                 {
-                    Debug.Log("1");
                     if (PlayerCam.holdingObject.name == keyModel.name)
                     {
                         thisOutline.enabled = true;
+                        intHints.ShowF();
+                        //FKeyHintShow.self.SetActive(true);
                         if (Input.GetKeyDown(KeyCode.F))
                         {
-                            Debug.Log("2");
+                            if (nextModel.TryGetComponent<Outline>(out _))
+                            {
+                                thisOutline = nextModel.GetComponent<Outline>();
+                            }
                             thisOutline.enabled = false;
-                            thisOutline = null;
+                            intHints.HideF();
+                            //FKeyHintShow.self.SetActive(false);
                             createdModel = Instantiate(nextModel, transform.position, Quaternion.identity);
                             Destroy(this.gameObject);
                         }

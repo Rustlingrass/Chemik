@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0978037eaa925d4c99e2d0a1456dcad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 5916081824904958142, guid: aa869a6f609e4c747a4175f36f8356b8, type: 3}
   keyModel: {fileID: 3141379728231367820, guid: bed36eadc3fb5e04b848c6ab19d63ef9,
     type: 3}
   nextModel: {fileID: 1269516100662324327, guid: 05ec4df3bb4db6a4f90cba39c191835a,

@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4899bd2f43483484f87685dc66d1892f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.022593021
+      value: 0.022593077
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4899bd2f43483484f87685dc66d1892f,
         type: 3}
@@ -21,7 +21,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4899bd2f43483484f87685dc66d1892f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.054700136
+      value: -0.054700144
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4899bd2f43483484f87685dc66d1892f,
         type: 3}
@@ -110,7 +110,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.7232603, y: 0, z: 1.181462}
+  m_Size: {x: 2.93, y: 0, z: 1.66}
   m_Center: {x: -0.09460586, y: 0, z: 0.08530247}
 --- !u!114 &8385976130078275864
 MonoBehaviour:
@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0978037eaa925d4c99e2d0a1456dcad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 0}
   keyModel: {fileID: 5953423717631558625, guid: 169f3ee5cd6fefa4d9104297a9ecc9cd,
     type: 3}
   nextModel: {fileID: 2032810401056746788, guid: b01f5db3145a4344a814f38a52a3ffd6,

@@ -6,7 +6,9 @@ using UnityEngine;
 public class PlayerCam : MonoBehaviour
 {
     //outlining variables
+    public GameObject manager;
     GameObject outlined;
+
 
     public float sensX;
     public float sensY;
@@ -27,10 +29,14 @@ public class PlayerCam : MonoBehaviour
     //Raycasting in physics
     Ray ray;
     RaycastHit looking, hitPut;
+
+    //actions with UI
+    private InteractionHints intHints;
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        intHints = manager.GetComponent<InteractionHints>();
     }
     private void Update()
     {
@@ -103,7 +109,12 @@ public class PlayerCam : MonoBehaviour
             holdingObject.transform.SetParent(null);
             holding = false;
             holdingObject = null;
-            ChangeModel.thisOutline.enabled = false;
+            if (ChangeModel.thisOutline != null)
+            {
+                ChangeModel.thisOutline.enabled = false;
+            }
+            intHints.HideF();
+            //FKeyHintShow.self.SetActive(false);
         }
     }
     /*private void PutHolding()
