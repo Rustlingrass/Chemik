@@ -39,7 +39,7 @@ public class ChangeModel : MonoBehaviour
                     {
                         thisOutline.enabled = true;
                         intHints.ShowF();
-                        //FKeyHintShow.self.SetActive(true);
+                        
                         if (Input.GetKeyDown(KeyCode.F))
                         {
                             if (nextModel.TryGetComponent<Outline>(out _))
@@ -47,9 +47,17 @@ public class ChangeModel : MonoBehaviour
                                 thisOutline = nextModel.GetComponent<Outline>();
                             }
                             thisOutline.enabled = false;
+                            
+                            //interaction hint
                             intHints.HideF();
-                            //FKeyHintShow.self.SetActive(false);
+
+                            //changing the task message
+                            intHints.ChangeTaskMessage();
+
+                            //changing the model
                             createdModel = Instantiate(nextModel, transform.position, Quaternion.identity);
+                            createdModel.transform.SetParent(transform.parent, true);
+                            //createdModel.transform.localPosition = transform.localPosition;
                             Destroy(this.gameObject);
                         }
                     }
