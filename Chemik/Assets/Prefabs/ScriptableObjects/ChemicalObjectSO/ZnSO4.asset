@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4b25b6c6bba5154eb4b3c863fa94047, type: 3}
+  m_Name: ZnSO4
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 6658066333749565311, guid: a9966bfc38f0546438113b608d8ddc3d, type: 3}
+  objectName: ZnSO4

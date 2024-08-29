@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcee65f381c005f45a154eff38017c40, type: 3}
+  m_Name: EmptyTube - TubeWithWater
+  m_EditorClassIdentifier: 
+  inputObject: {fileID: 11400000, guid: cbe90e3e0612b27459d5e43fa8d03c10, type: 2}
+  outputObject: {fileID: 11400000, guid: 04e1f13004587ee49b3c0fede80c1589, type: 2}
+  keyObject: {fileID: 11400000, guid: 68f04e2c2b9c27644a307118bb762167, type: 2}

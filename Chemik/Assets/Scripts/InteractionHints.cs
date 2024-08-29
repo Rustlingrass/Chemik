@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InteractionHints : MonoBehaviour
 {
+    /*
     public GameObject FKeyHint;
     public GameObject TaskText;
     public static GameObject TaskMessages;
@@ -40,5 +41,5 @@ public class InteractionHints : MonoBehaviour
         }
     }
 
-
+    */
 }
