@@ -4,14 +4,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LevelSelection : MonoBehaviour
+public class LevelSelectionUI : MonoBehaviour
 {
+    public static LevelSelectionUI Instance { get; private set; }
     [SerializeField] private Transform mainMenuUI;
     [SerializeField] private Button basicsExperimentButton;
     [SerializeField] private Button acidsExperimentButton;
     [SerializeField] private Button amphotericsExperimentButton;
     [SerializeField] private Button backButton;
-
+    private void Awake() {
+        Instance = this;
+    }
     private void Start() {
         basicsExperimentButton.onClick.AddListener(() => {
             Loader.LoadingScreen(2);
@@ -26,5 +29,9 @@ public class LevelSelection : MonoBehaviour
             mainMenuUI.gameObject.SetActive(true);
             gameObject.SetActive(false);
         });
+    }
+
+    public void SetSelection() {
+        basicsExperimentButton.Select();
     }
 }

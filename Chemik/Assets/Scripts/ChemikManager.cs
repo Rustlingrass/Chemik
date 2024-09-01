@@ -44,6 +44,9 @@ public class ChemikManager : MonoBehaviour {
         OnStateChanged?.Invoke(this, new OnStateChangedEventArgs {  
             state = experimentState 
         });
+        if (experimentState == State.ExperimentFinished) {
+            TogglePauseGame();
+        }
     }
 
 

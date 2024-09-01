@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InGameUI : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class InGameUI : MonoBehaviour
     
     [SerializeField] private GameObject inGameKeyHintsUI;
     [SerializeField] private GameObject inGameHintsUI;
+    [SerializeField] private GameObject experimentFinishedMessageUI;
+    [SerializeField] private Button backToMainMenuButton;
     [SerializeField] private TextMeshProUGUI inGameHintsUIText;
     [SerializeField] private ExperimentHintsSO experimentHintsSO;
     private int hintCounter = 0;
@@ -20,10 +23,17 @@ public class InGameUI : MonoBehaviour
         ChemikManager.Instance.OnGamePaused += ChemikManager_OnGamePaused;
         ChemikManager.Instance.OnGameUnpaused += ChemikManager_OnGameUnpaused;
         ChemikManager.Instance.OnStateChanged += ChemikManager_OnStateChanged;
+        backToMainMenuButton.onClick.AddListener(() => {
+            Loader.LoadingScreen(0);
+        });
+        HideFinishedMessage();
     }
 
     private void ChemikManager_OnStateChanged(object sender, ChemikManager.OnStateChangedEventArgs e) {
         ChangeHintText();
+        if (e.state == ChemikManager.State.ExperimentFinished) {
+            ShowFinishedMessage();
+        }
     }
 
     private void ChemikManager_OnGameUnpaused(object sender, System.EventArgs e) {
@@ -46,5 +56,12 @@ public class InGameUI : MonoBehaviour
     private void ChangeHintText() {
         inGameHintsUIText.text = experimentHintsSO.experimentHintsList[hintCounter];
         hintCounter++;
+    }
+
+    private void ShowFinishedMessage() {
+        experimentFinishedMessageUI.SetActive(true);
+    }
+    private void HideFinishedMessage() {
+        experimentFinishedMessageUI.SetActive(false);
     }
 }
