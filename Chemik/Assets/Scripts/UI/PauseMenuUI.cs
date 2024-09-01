@@ -23,7 +23,7 @@ public class PauseMenuUI : MonoBehaviour
         });
         mainMenuButton.onClick.AddListener(() => {
             Time.timeScale = 1.0f;
-            SceneManager.LoadScene(0);
+            Loader.LoadingScreen(0);
         });
         ChemikManager.Instance.OnGamePaused += ChemikManager_OnGamePaused;
         ChemikManager.Instance.OnGameUnpaused += ChemikManager_OnGameUnpaused;

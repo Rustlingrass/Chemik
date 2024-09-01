@@ -2,19 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelSelection : MonoBehaviour
 {
-    public void BasicExperiment() 
-    {
-        SceneManager.LoadScene(sceneName: "BasicExperiment");
-    }
-    public void AcidsExperiment()
-    {
-        SceneManager.LoadScene(sceneName: "AcidsExperiment");
-    }
-    public void AmphotericExperiment()
-    {
-        SceneManager.LoadScene(sceneName: "AmphotericExperiment");
+    [SerializeField] private Transform mainMenuUI;
+    [SerializeField] private Button basicsExperimentButton;
+    [SerializeField] private Button acidsExperimentButton;
+    [SerializeField] private Button amphotericsExperimentButton;
+    [SerializeField] private Button backButton;
+
+    private void Start() {
+        basicsExperimentButton.onClick.AddListener(() => {
+            Loader.LoadingScreen(2);
+        });
+        acidsExperimentButton.onClick.AddListener(() => {
+            Loader.LoadingScreen(3);
+        });
+        amphotericsExperimentButton.onClick.AddListener(() => {
+            Loader.LoadingScreen(4);
+        });
+        backButton.onClick.AddListener(() => {
+            mainMenuUI.gameObject.SetActive(true);
+            gameObject.SetActive(false);
+        });
     }
 }
