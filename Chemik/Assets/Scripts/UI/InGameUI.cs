@@ -28,7 +28,7 @@ public class InGameUI : MonoBehaviour
 
     private void ChemikManager_OnStateChanged(object sender, ChemikManager.OnStateChangedEventArgs e) {
         ChangeHintText();
-        if (e.basicsExperimentState == ChemikManager.BasicsExperimentState.ExperimentFinished) {
+        if (e.basicsExperimentState == ChemikManager.BasicsExperimentState.ExperimentFinished || e.amphotericsExperimentState == ChemikManager.AmphotericsExperimentState.ExperimentFinished) {
             ShowFinishedMessage();
             inGameHintsUI.SetActive(false);
         }

@@ -16,6 +16,7 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button exitButton;
     [SerializeField] private Button aboutButton;
+    [SerializeField] private Button aboutBackButton;
     private void Awake() {
         Instance = this;
     }
@@ -34,6 +35,10 @@ public class MainMenuUI : MonoBehaviour
         });
         exitButton.onClick.AddListener(() => {
             Application.Quit();
+        });
+        aboutBackButton.onClick.AddListener(() => {
+            aboutWindow.SetActive(false);
+            gameObject.SetActive(true);
         });
     }
 }
