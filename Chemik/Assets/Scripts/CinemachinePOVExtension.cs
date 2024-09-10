@@ -12,6 +12,14 @@ public class CinemachinePOVExtension : CinemachineExtension {
 
     private GameInput gameInput;
     private Vector3 startingRotation;
+    private bool isZoomed = false;
+    private void Start() {
+        GameInput.Instance.OnZoomAction += GameInput_OnZoomAction;
+    }
+
+    private void GameInput_OnZoomAction(object sender, System.EventArgs e) {
+        ToggleZoomState();
+    }
 
     protected override void Awake() {
         base.Awake();
@@ -27,6 +35,15 @@ public class CinemachinePOVExtension : CinemachineExtension {
                     state.RawOrientation = Quaternion.Euler(startingRotation.y, startingRotation.x, 0);
                 }
             }
+        }
+    }
+    private void ToggleZoomState() {
+        if (!isZoomed) {
+            GetComponent<CinemachineVirtualCamera>().m_Lens.FieldOfView = 17f;
+            isZoomed = true;
+        } else {
+            GetComponent<CinemachineVirtualCamera>().m_Lens.FieldOfView = 60f;
+            isZoomed = false;
         }
     }
 }

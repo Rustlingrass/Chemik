@@ -104,7 +104,10 @@ MonoBehaviour:
   basicsModelSwapSOArray:
   - {fileID: 11400000, guid: 8498d347e96d051438ab6da66e92ed7f, type: 2}
   - {fileID: 11400000, guid: 7c83f572b30233448875b564a9912cf9, type: 2}
-  amphotericsModelSwapSOArray: []
+  amphotericsModelSwapSOArray:
+  - {fileID: 11400000, guid: 2d30231318cfc414898766236ec9f32e, type: 2}
+  - {fileID: 11400000, guid: f09c394caf59305448820755ebfe5971, type: 2}
+  - {fileID: 11400000, guid: 2234f3ca98283754e86ea9e9c9b78394, type: 2}
   tubeHolderPlace: {fileID: 6092529791194083376}
   currentTubeGameObjectOne: {fileID: 7261580192838565704}
   currentTubeGameObjectTwo: {fileID: 41603468145593196}

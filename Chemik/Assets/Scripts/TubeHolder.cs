@@ -9,12 +9,14 @@ public class TubeHolder : ChemicalObject {
     public event EventHandler OnModelSwapped;
     [SerializeField] private ModelSwapSO[] basicsModelSwapSOArray;
     [SerializeField] private ModelSwapSO[] amphotericsModelSwapSOArray;
-    [SerializeField] private Transform tubeHolderPlace;
+    [SerializeField] private Transform tubeHolderPlaceOne;
+    [SerializeField] private Transform tubeHolderPlaceTwo;
     [SerializeField] private GameObject currentTubeGameObjectOne;
     [SerializeField] private GameObject currentTubeGameObjectTwo;
 
     private Tube currentTubeOne;
     private Tube currentTubeTwo;
+    private LakmusIndicator lakmusIndicator;
     private void Awake() {
         Instance = this;
     }
@@ -31,15 +33,14 @@ public class TubeHolder : ChemicalObject {
             case ChemikManager.Experiment.BasicsExperiment:
                 Debug.Log(ChemikManager.Instance.GetBasicsExperimentState());
                 if (ChemikManager.Instance.IsBasicsCheckingTheEnvironmentState()) {
-                    if (chemicalObject.TryGetComponent<LakmusIndicator>(out LakmusIndicator lakmusIndicator)) {
-                        Debug.Log("TubeHolder 35");
+                    if (chemicalObject.TryGetComponent<LakmusIndicator>(out lakmusIndicator)) {
                         lakmusIndicator.ChangeLakmusModelToBlue(currentTubeOne);
                         OnModelSwapped?.Invoke(this, EventArgs.Empty);
                     }
                 } else {
                     foreach (ModelSwapSO basicsModelSwapSO in basicsModelSwapSOArray) {
                         //Check with every ModelSwapSO for BasicsExperiment
-                        if (TryCheckAndChangeTube(basicsModelSwapSO, chemicalObject, currentTubeOne, currentTubeGameObjectOne, out currentTubeOne, out currentTubeGameObjectOne)) {
+                        if (TryCheckAndChangeTube(basicsModelSwapSO, chemicalObject, currentTubeOne, currentTubeGameObjectOne, tubeHolderPlaceOne, out currentTubeOne, out currentTubeGameObjectOne)) {
                             OnModelSwapped?.Invoke(this, EventArgs.Empty);
                             break;
                         }
@@ -47,44 +48,57 @@ public class TubeHolder : ChemicalObject {
                 }
                 break;
             case ChemikManager.Experiment.AmphotericsExperiment:
-                //Interaction
-                if (ChemikManager.Instance.GetAmphotericsExperimentState() == ChemikManager.AmphotericsExperimentState.AddingNaOH) {
-                    //Pouring NaOH to both tubes
-                    foreach (ModelSwapSO amphotericsModelSwapSO in amphotericsModelSwapSOArray) {
-                        //Check with every ModelSwapSO for AmphotericsExperiment
-                        TryCheckAndChangeTube(amphotericsModelSwapSO, chemicalObject, currentTubeOne, currentTubeGameObjectOne, out currentTubeTwo, out currentTubeGameObjectOne);
-                        TryCheckAndChangeTube(amphotericsModelSwapSO, chemicalObject, currentTubeTwo, currentTubeGameObjectTwo, out currentTubeTwo, out currentTubeGameObjectTwo);
-                        OnModelSwapped?.Invoke(this, EventArgs.Empty);
-                    }
-                } else if (ChemikManager.Instance.GetAmphotericsExperimentState() == ChemikManager.AmphotericsExperimentState.AddingAcidToTheFirstTube) {
-                    foreach (ModelSwapSO amphotericsModelSwapSO in amphotericsModelSwapSOArray) {
-                        //Check with every ModelSwapSO for AmphotericsExperiment
-                        TryCheckAndChangeTube(amphotericsModelSwapSO, chemicalObject, currentTubeOne, currentTubeGameObjectOne, out currentTubeOne, out currentTubeGameObjectOne);
-                        OnModelSwapped?.Invoke(this, EventArgs.Empty);
-                    }
-                } else if (ChemikManager.Instance.GetAmphotericsExperimentState() == ChemikManager.AmphotericsExperimentState.AddingNaOHToTheSecondTube) {
-                    foreach (ModelSwapSO amphotericsModelSwapSO in amphotericsModelSwapSOArray) {
-                        //Check with every ModelSwapSO for AmphotericsExperiment
-                        TryCheckAndChangeTube(amphotericsModelSwapSO, chemicalObject, currentTubeTwo, currentTubeGameObjectTwo, out currentTubeTwo, out currentTubeGameObjectTwo);
-                        OnModelSwapped?.Invoke(this, EventArgs.Empty);
-                    }
-                } else if (ChemikManager.Instance.GetAmphotericsExperimentState() == ChemikManager.AmphotericsExperimentState.CheckingFirstTubeEnvironmentToBeAcid) {
-                    //Checking the environment of the acid
-                    if (chemicalObject.TryGetComponent<LakmusIndicator>(out LakmusIndicator lakmusIndicator)) {
-                        lakmusIndicator.ChangeLakmusModelToRed(currentTubeOne);
-                        OnModelSwapped?.Invoke(this, EventArgs.Empty);
-                    }
-                } else if (ChemikManager.Instance.GetAmphotericsExperimentState() == ChemikManager.AmphotericsExperimentState.CheckingSecondTubeEnvironmentToBeBasic) {
-                    //Checking the environment of the basic
-                    if (chemicalObject.TryGetComponent<LakmusIndicator>(out LakmusIndicator lakmusIndicator)) {
-                        lakmusIndicator.ChangeLakmusModelToBlue(currentTubeTwo);
-                        OnModelSwapped?.Invoke(this, EventArgs.Empty);
-                    }
+                Debug.Log(ChemikManager.Instance.GetAmphotericsExperimentState());
+                switch (ChemikManager.Instance.GetAmphotericsExperimentState()) {
+                    default: break;
+                    case ChemikManager.AmphotericsExperimentState.CheckingSecondTubeEnvironmentToBeBasic:
+                        //Checking the environment of the basic
+                        if (chemicalObject.TryGetComponent<LakmusIndicator>(out lakmusIndicator)) {
+                            lakmusIndicator.ChangeLakmusModelToBlue(currentTubeTwo);
+                            OnModelSwapped?.Invoke(this, EventArgs.Empty);
+                        }
+                        break;
+                    case ChemikManager.AmphotericsExperimentState.CheckingFirstTubeEnvironmentToBeAcid:
+                        // Checking the environment of the acid
+                        if (chemicalObject.TryGetComponent<LakmusIndicator>(out lakmusIndicator)) {
+                            lakmusIndicator.ChangeLakmusModelToRed(currentTubeOne);
+                            OnModelSwapped?.Invoke(this, EventArgs.Empty);
+                        }
+                        break;
+                    case ChemikManager.AmphotericsExperimentState.AddingNaOHToTheSecondTube:
+                        foreach (ModelSwapSO amphotericsModelSwapSO in amphotericsModelSwapSOArray) {
+                            //Check with every ModelSwapSO for AmphotericsExperiment
+                            if (TryCheckAndChangeTube(amphotericsModelSwapSO, chemicalObject, currentTubeTwo, currentTubeGameObjectTwo, tubeHolderPlaceTwo, out currentTubeTwo, out currentTubeGameObjectTwo)) {
+                                OnModelSwapped?.Invoke(this, EventArgs.Empty);
+                                break;
+                            }
+                        }
+                        break;
+                    case ChemikManager.AmphotericsExperimentState.AddingAcidToTheFirstTube:
+                        foreach (ModelSwapSO amphotericsModelSwapSO in amphotericsModelSwapSOArray) {
+                            //Check with every ModelSwapSO for AmphotericsExperiment
+                            if (TryCheckAndChangeTube(amphotericsModelSwapSO, chemicalObject, currentTubeOne, currentTubeGameObjectOne, tubeHolderPlaceOne, out currentTubeOne, out currentTubeGameObjectOne)) {
+                                OnModelSwapped?.Invoke(this, EventArgs.Empty);
+                                break;
+                            }
+                        }
+                        break;
+                    case ChemikManager.AmphotericsExperimentState.AddingNaOH:
+                        //Pouring NaOH to both tubes
+                        Debug.Log("Tube Holder line 57");
+                        foreach (ModelSwapSO amphotericsModelSwapSO in amphotericsModelSwapSOArray) {
+                            //Check with every ModelSwapSO for AmphotericsExperiment
+                            if (TryCheckAndChangeTube(amphotericsModelSwapSO, chemicalObject, currentTubeOne, currentTubeGameObjectOne, tubeHolderPlaceOne, out currentTubeOne, out currentTubeGameObjectOne) && TryCheckAndChangeTube(amphotericsModelSwapSO, chemicalObject, currentTubeTwo, currentTubeGameObjectTwo, tubeHolderPlaceTwo, out currentTubeTwo, out currentTubeGameObjectTwo)) {
+                                OnModelSwapped?.Invoke(this, EventArgs.Empty);
+                                break;
+                            }
+                        }
+                        break;
                 }
-                    break;
+                break;
         }
     }
-    private bool TryCheckAndChangeTube(ModelSwapSO modelSwapSO, ChemicalObject chemicalObject, Tube currentTube, GameObject currentTubeGameObject, out Tube currentTubeOut, out GameObject currentTubeGameObjectOut) {
+    private bool TryCheckAndChangeTube(ModelSwapSO modelSwapSO, ChemicalObject chemicalObject, Tube currentTube, GameObject currentTubeGameObject, Transform tubeHolderPlace, out Tube currentTubeOut, out GameObject currentTubeGameObjectOut) {
         currentTubeOut = currentTube;
         currentTubeGameObjectOut = currentTubeGameObject;
         if (modelSwapSO.keyObject == chemicalObject.GetChemicalObjectSO()) {

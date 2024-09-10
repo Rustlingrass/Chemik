@@ -10,6 +10,7 @@ public class GameInput : MonoBehaviour {
     public event EventHandler OnInteractAction;
     public event EventHandler OnInteractAlternateAction;
     public event EventHandler OnPauseAction;
+    public event EventHandler OnZoomAction;
     private PlayerInputActions playerInputActions;
 
     private void Awake() {
@@ -19,12 +20,19 @@ public class GameInput : MonoBehaviour {
         playerInputActions.Player.Interact.performed += Interact_performed;
         playerInputActions.Player.InteractAlternate.performed += InteractAlternate_performed;
         playerInputActions.Player.Pause.performed += Pause_performed;
+        playerInputActions.Player.Zoom.performed += Zoom_performed;
     }
+
+
     private void OnDestroy() {
         playerInputActions.Player.Interact.performed -= Interact_performed;
         playerInputActions.Player.InteractAlternate.performed -= InteractAlternate_performed;
         playerInputActions.Player.Pause.performed -= Pause_performed;
+        playerInputActions.Player.Zoom.performed -= Zoom_performed;
         playerInputActions.Dispose();
+    }
+    private void Zoom_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
+        OnZoomAction?.Invoke(this, EventArgs.Empty);
     }
     private void Pause_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
         OnPauseAction?.Invoke(this, EventArgs.Empty);

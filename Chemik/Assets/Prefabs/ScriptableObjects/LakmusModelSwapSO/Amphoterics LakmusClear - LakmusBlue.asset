@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0e52da9df63e8f4c8237ea9f8ce8b58, type: 3}
-  m_Name: LakmusClear - LakmusBlue
+  m_Name: Amphoterics LakmusClear - LakmusBlue
   m_EditorClassIdentifier: 
   inputObject: {fileID: 11400000, guid: 7d682b868a0e97249a2c4c7b015da00e, type: 2}
   outputObject: {fileID: 11400000, guid: 50c38351ec1ce6c40be9a55c5b27d7a4, type: 2}
-  keyObject: {fileID: 11400000, guid: 3f5b129a7e21d6b478d38f207d015633, type: 2}
+  keyObject: {fileID: 11400000, guid: 9984b638939e2ae41a8c0bc23d611f83, type: 2}
