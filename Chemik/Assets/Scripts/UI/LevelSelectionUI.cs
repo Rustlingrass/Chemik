@@ -30,8 +30,4 @@ public class LevelSelectionUI : MonoBehaviour
             gameObject.SetActive(false);
         });
     }
-
-    public void SetSelection() {
-        basicsExperimentButton.Select();
-    }
 }

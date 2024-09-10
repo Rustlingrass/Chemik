@@ -15,7 +15,7 @@ public class SelectedChemicalObject : MonoBehaviour {
     private void Player_OnSelectedObjectChanged(object sender, Player.OnSelectedObjectChangedEventArgs e) {
         if (selectedChemicalObjectVisualArray != null) {
             if (e.selectedObject == chemicalObject) {
-                Debug.Log(chemicalObject);
+                //Debug.Log(chemicalObject);
                 Show();
             } else {
                 Hide();

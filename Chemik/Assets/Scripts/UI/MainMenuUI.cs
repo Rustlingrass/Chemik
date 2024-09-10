@@ -23,7 +23,6 @@ public class MainMenuUI : MonoBehaviour
         startButton.onClick.AddListener(() => {
             levelSelectionMenu.SetActive(true);
             gameObject.SetActive(false);
-            LevelSelectionUI.Instance.SetSelection();
         });
         settingsButton.onClick.AddListener(() => {
             settingsMenu.SetActive(true);

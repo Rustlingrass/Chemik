@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b25b6c6bba5154eb4b3c863fa94047, type: 3}
   m_Name: TubeWithCa(OH)2
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2539393959733187179, guid: 05ec4df3bb4db6a4f90cba39c191835a, type: 3}
+  objectPrefab: {fileID: 2539393959733187179, guid: 05ec4df3bb4db6a4f90cba39c191835a,
+    type: 3}
   objectName: Tube With Ca(OH)2

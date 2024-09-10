@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b25b6c6bba5154eb4b3c863fa94047, type: 3}
   m_Name: LakmusClear
   m_EditorClassIdentifier: 
-  prefab: {fileID: 5757022378433601005, guid: d440d05e230f97c41b78c8c8e1af004c, type: 3}
+  objectPrefab: {fileID: 5757022378433601005, guid: d440d05e230f97c41b78c8c8e1af004c,
+    type: 3}
   objectName: Lakmus Clear

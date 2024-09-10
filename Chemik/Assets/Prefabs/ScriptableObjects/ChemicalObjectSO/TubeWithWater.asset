@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b25b6c6bba5154eb4b3c863fa94047, type: 3}
   m_Name: TubeWithWater
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1393452805080501318, guid: b01f5db3145a4344a814f38a52a3ffd6, type: 3}
+  objectPrefab: {fileID: 1393452805080501318, guid: b01f5db3145a4344a814f38a52a3ffd6,
+    type: 3}
   objectName: Tube With Water

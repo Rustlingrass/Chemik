@@ -145,7 +145,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chemicalObjectSO: {fileID: 11400000, guid: 7d682b868a0e97249a2c4c7b015da00e, type: 2}
-  lakmusModelSwapSO: {fileID: 11400000, guid: bdb8da3c343081a4f81376a843847636, type: 2}
+  lakmusToBlueModelSwapSO: {fileID: 11400000, guid: bdb8da3c343081a4f81376a843847636,
+    type: 2}
+  lakmusToRedModelSwapSO: {fileID: 11400000, guid: bdb8da3c343081a4f81376a843847636,
+    type: 2}
 --- !u!1 &8448210920029719108
 GameObject:
   m_ObjectHideFlags: 0

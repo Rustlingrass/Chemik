@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b25b6c6bba5154eb4b3c863fa94047, type: 3}
   m_Name: EmptyTube
   m_EditorClassIdentifier: 
-  prefab: {fileID: 5672215082118344312, guid: 8c16f0723f5a6704ba686bdce3b51f0a, type: 3}
+  objectPrefab: {fileID: 5672215082118344312, guid: 8c16f0723f5a6704ba686bdce3b51f0a,
+    type: 3}
   objectName: Empty Tube

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b25b6c6bba5154eb4b3c863fa94047, type: 3}
   m_Name: ZnSO4
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6658066333749565311, guid: a9966bfc38f0546438113b608d8ddc3d, type: 3}
+  objectPrefab: {fileID: 6658066333749565311, guid: a9966bfc38f0546438113b608d8ddc3d,
+    type: 3}
   objectName: ZnSO4

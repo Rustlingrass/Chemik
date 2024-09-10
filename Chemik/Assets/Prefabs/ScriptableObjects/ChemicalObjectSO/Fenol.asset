@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b25b6c6bba5154eb4b3c863fa94047, type: 3}
   m_Name: Fenol
   m_EditorClassIdentifier: 
-  prefab: {fileID: 7570951202133681871, guid: 7a6c1d21c2015ed46bf28425325ff9c5, type: 3}
+  objectPrefab: {fileID: 7570951202133681871, guid: 7a6c1d21c2015ed46bf28425325ff9c5,
+    type: 3}
   objectName: Fenol

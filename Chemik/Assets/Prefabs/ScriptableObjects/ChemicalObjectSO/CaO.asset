@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b25b6c6bba5154eb4b3c863fa94047, type: 3}
   m_Name: CaO
   m_EditorClassIdentifier: 
-  prefab: {fileID: 8353280229362654038, guid: bed36eadc3fb5e04b848c6ab19d63ef9, type: 3}
+  objectPrefab: {fileID: 8353280229362654038, guid: bed36eadc3fb5e04b848c6ab19d63ef9,
+    type: 3}
   objectName: CaO

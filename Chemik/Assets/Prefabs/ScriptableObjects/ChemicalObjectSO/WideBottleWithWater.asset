@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b25b6c6bba5154eb4b3c863fa94047, type: 3}
   m_Name: WideBottleWithWater
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1975815382706704282, guid: b1431c6f777cdd34e83522cea1cfada3, type: 3}
+  objectPrefab: {fileID: 1975815382706704282, guid: b1431c6f777cdd34e83522cea1cfada3,
+    type: 3}
   objectName: Wide Bottle With Water

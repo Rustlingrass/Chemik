@@ -8,7 +8,6 @@ public class CinemachinePOVExtension : CinemachineExtension {
     [SerializeField] private float horizontalSpeed = 10f;
     [SerializeField] private float verticalSpeed = 10f;
     [SerializeField] private float clampAngle = 80f;
-    [SerializeField] private Transform orientation;
 
 
     private GameInput gameInput;
