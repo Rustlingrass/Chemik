@@ -15,6 +15,7 @@ public class ChemikManager : MonoBehaviour {
         public BasicsExperimentState basicsExperimentState;
         public AmphotericsExperimentState amphotericsExperimentState;
     }
+    [SerializeField] private ExperimentHintsSOList experimentHintsSOList;
     private bool isGamePaused = false;
     private bool mouseLocked = true;
     public enum Experiment {
@@ -126,7 +127,7 @@ public class ChemikManager : MonoBehaviour {
                             amphotericsExperimentState = AmphotericsExperimentState.AddingNaOH;
                             break;
                         case AmphotericsExperimentState.AddingNaOH:
-                            amphotericsExperimentState = AmphotericsExperimentState.AddingAcidToTheFirstTube; 
+                            amphotericsExperimentState = AmphotericsExperimentState.AddingAcidToTheFirstTube;
                             break;
                         case AmphotericsExperimentState.AddingAcidToTheFirstTube:
                             amphotericsExperimentState = AmphotericsExperimentState.AddingNaOHToTheSecondTube;
@@ -143,7 +144,8 @@ public class ChemikManager : MonoBehaviour {
                     }
                     break;
                 }
-    }
+        }
+        //experimentHintsSO.experimentHintsList.Remove()
     }
 
     public bool IsBasicsCheckingTheEnvironmentState() {
@@ -158,5 +160,9 @@ public class ChemikManager : MonoBehaviour {
     }
     public BasicsExperimentState GetBasicsExperimentState() {
         return basicsExperimentState;
+    }
+
+    public ExperimentHintsSOList GetExperimentHintsSOList() {
+        return experimentHintsSOList;
     }
 }

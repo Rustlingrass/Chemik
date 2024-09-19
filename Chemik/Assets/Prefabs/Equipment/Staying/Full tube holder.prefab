@@ -108,7 +108,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2d30231318cfc414898766236ec9f32e, type: 2}
   - {fileID: 11400000, guid: f09c394caf59305448820755ebfe5971, type: 2}
   - {fileID: 11400000, guid: 2234f3ca98283754e86ea9e9c9b78394, type: 2}
-  tubeHolderPlace: {fileID: 6092529791194083376}
+  tubeHolderPlaceOne: {fileID: 6092529791194083376}
+  tubeHolderPlaceTwo: {fileID: 4823741825208646311}
   currentTubeGameObjectOne: {fileID: 7261580192838565704}
   currentTubeGameObjectTwo: {fileID: 41603468145593196}
 --- !u!1 &4140855696697716943

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: LakmusClear - LakmusRed
   m_EditorClassIdentifier: 
   inputObject: {fileID: 11400000, guid: 7d682b868a0e97249a2c4c7b015da00e, type: 2}
-  outputObject: {fileID: 11400000, guid: 50c38351ec1ce6c40be9a55c5b27d7a4, type: 2}
+  outputObject: {fileID: 11400000, guid: be99e0e4e62e80a47aa09b13d770d37d, type: 2}
   keyObject: {fileID: 11400000, guid: da0fd053d046c924ea3d615db0690abc, type: 2}

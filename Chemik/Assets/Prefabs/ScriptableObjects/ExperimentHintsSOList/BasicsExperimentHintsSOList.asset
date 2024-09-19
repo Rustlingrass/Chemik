@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3bfcd91745b1ce4d83db2cdde82b047, type: 3}
+  m_Name: BasicsExperimentHintsSOList
+  m_EditorClassIdentifier: 
+  experimentHintsArray:
+  - {fileID: 11400000, guid: bc29f97eda1dd394a9689208dab4291b, type: 2}
+  - {fileID: 11400000, guid: 2e18ebd4ed85c664cb1de34ab9bd3164, type: 2}
+  - {fileID: 11400000, guid: cfe72768bdb029f459cdf38571cf475f, type: 2}
+  - {fileID: 11400000, guid: 2c580d7152a9e9d4f8bbcb3959148ca1, type: 2}

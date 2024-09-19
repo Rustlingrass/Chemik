@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3bfcd91745b1ce4d83db2cdde82b047, type: 3}
+  m_Name: AmphotericsExperimentHintsSOList
+  m_EditorClassIdentifier: 
+  experimentHintsArray:
+  - {fileID: 11400000, guid: 5728ed4839492e145b77377b54d19d63, type: 2}
+  - {fileID: 11400000, guid: ee2462353fbb3254aaf6317a7d89a901, type: 2}
+  - {fileID: 11400000, guid: 95488e68aca39bd4fb2f23f9a15826a7, type: 2}
+  - {fileID: 11400000, guid: 806aaf0ae6fbd5446baa741cbe48a0cb, type: 2}
+  - {fileID: 11400000, guid: 83ec26fcb80f2764bb6299fcb23b21ce, type: 2}

@@ -7,19 +7,20 @@ using UnityEngine.UI;
 
 public class InGameUI : MonoBehaviour
 {
+    private const string IN_GAME_HINTS_UI_TASK_CLEARED = "TaskCleared";
     public static InGameUI Instance { get; private set; }
     
     [SerializeField] private GameObject inGameKeyHintsUI;
     [SerializeField] private GameObject inGameHintsUI;
     [SerializeField] private GameObject experimentFinishedMessageUI;
-    [SerializeField] private TextMeshProUGUI inGameHintsUIText;
-    [SerializeField] private ExperimentHintsSO experimentHintsSO;
+    [SerializeField] private GameObject[] inGameHintsUIArray;
     private int hintCounter = 0;
+    private Animator animator;
     private void Awake() {
         Instance = this;
-        hintCounter++;
     }
     private void Start() {
+        animator = inGameHintsUI.GetComponent<Animator>();
         ChemikManager.Instance.OnGamePaused += ChemikManager_OnGamePaused;
         ChemikManager.Instance.OnGameUnpaused += ChemikManager_OnGameUnpaused;
         ChemikManager.Instance.OnStateChanged += ChemikManager_OnStateChanged;
@@ -52,7 +53,8 @@ public class InGameUI : MonoBehaviour
     }
 
     private void ChangeHintText() {
-        inGameHintsUIText.text = experimentHintsSO.experimentHintsList[hintCounter];
+        animator.SetTrigger(IN_GAME_HINTS_UI_TASK_CLEARED);
+        inGameHintsUIArray[hintCounter].SetActive(false);
         hintCounter++;
     }
 
