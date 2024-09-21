@@ -14,6 +14,7 @@ public class ChemikManager : MonoBehaviour {
     public class OnStateChangedEventArgs : EventArgs {
         public BasicsExperimentState basicsExperimentState;
         public AmphotericsExperimentState amphotericsExperimentState;
+        public AcidsExperimentState acidsExperimentState;
     }
     [SerializeField] private ExperimentHintsSOList experimentHintsSOList;
     private bool isGamePaused = false;
@@ -30,10 +31,14 @@ public class ChemikManager : MonoBehaviour {
         CheckingTheEnvironment,
         ExperimentFinished
     }
-    /*public enum AcidsExperimentState {
+    public enum AcidsExperimentState {
         ExperimentStarted,
+        HeatingTheSeraWithAlcoholHeater,
+        PlacingSeraToFlaskWithO2,
+        AddingWaterToFlaskWithSO2,
+        CheckingTheEnvironmentWithMetil,
         ExperimentFinished
-    }*/
+    }
     public enum AmphotericsExperimentState {
         ExperimentStarted,
         AddingNaOH,
@@ -44,22 +49,34 @@ public class ChemikManager : MonoBehaviour {
         ExperimentFinished
     }
     [SerializeField] private BasicsExperimentState basicsExperimentState;
+    [SerializeField] private AcidsExperimentState acidsExperimentState;
     [SerializeField] private AmphotericsExperimentState amphotericsExperimentState;
     [SerializeField] private Experiment experimentName;
     private void Awake() {
         Instance = this;
         basicsExperimentState = BasicsExperimentState.ExperimentStarted;
         amphotericsExperimentState = AmphotericsExperimentState.ExperimentStarted;
+        acidsExperimentState = AcidsExperimentState.ExperimentStarted;
         ChangeExperimentStageState();
         OnStateChanged?.Invoke(this, new OnStateChangedEventArgs {
             basicsExperimentState = basicsExperimentState,
-            amphotericsExperimentState = amphotericsExperimentState
+            amphotericsExperimentState = amphotericsExperimentState,
+            acidsExperimentState = acidsExperimentState
         });
     }
     private void Start() {
         GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
-        TubeHolder.Instance.OnModelSwapped += TubeHolder_OnModelSwapped;
+        if (TubeHolder.Instance != null) {
+            TubeHolder.Instance.OnModelSwapped += TubeHolder_OnModelSwapped;
+        }
+        if (AlcoholHeater.Instance != null) {
+            AlcoholHeater.Instance.OnObjectHeated += AlcoholHeater_OnObjectHeated;
+        }
         ToggleMouseState();
+    }
+
+    private void AlcoholHeater_OnObjectHeated(object sender, EventArgs e) {
+        ChangeExperimentStageState();
     }
 
     private void TubeHolder_OnModelSwapped(object sender, EventArgs e) {
@@ -67,7 +84,8 @@ public class ChemikManager : MonoBehaviour {
         Debug.Log(basicsExperimentState);
         OnStateChanged?.Invoke(this, new OnStateChangedEventArgs {  
             basicsExperimentState = basicsExperimentState,
-            amphotericsExperimentState = amphotericsExperimentState
+            amphotericsExperimentState = amphotericsExperimentState,
+            acidsExperimentState = acidsExperimentState
         });
     }
 
@@ -102,50 +120,67 @@ public class ChemikManager : MonoBehaviour {
     private void ChangeExperimentStageState() {
         switch (experimentName) {
             default: break;
-            case Experiment.BasicsExperiment: {
-                    switch (basicsExperimentState) {
-                        default: break;
-                        case BasicsExperimentState.ExperimentStarted:
-                            basicsExperimentState = BasicsExperimentState.AddingWaterToTheTube;
-                            break;
-                        case BasicsExperimentState.AddingWaterToTheTube:
-                            basicsExperimentState = BasicsExperimentState.AddingCaOToTheTube;
-                            break;
-                        case BasicsExperimentState.AddingCaOToTheTube:
-                            basicsExperimentState = BasicsExperimentState.CheckingTheEnvironment;
-                            break;
-                        case BasicsExperimentState.CheckingTheEnvironment:
-                            basicsExperimentState = BasicsExperimentState.ExperimentFinished;
-                            break;
-                    }
-                    break;
-            }
-            case Experiment.AmphotericsExperiment: {
-                    switch (amphotericsExperimentState) {
-                        default: break;
-                        case AmphotericsExperimentState.ExperimentStarted:
-                            amphotericsExperimentState = AmphotericsExperimentState.AddingNaOH;
-                            break;
-                        case AmphotericsExperimentState.AddingNaOH:
-                            amphotericsExperimentState = AmphotericsExperimentState.AddingAcidToTheFirstTube;
-                            break;
-                        case AmphotericsExperimentState.AddingAcidToTheFirstTube:
-                            amphotericsExperimentState = AmphotericsExperimentState.AddingNaOHToTheSecondTube;
-                            break;
-                        case AmphotericsExperimentState.AddingNaOHToTheSecondTube:
-                            amphotericsExperimentState = AmphotericsExperimentState.CheckingFirstTubeEnvironmentToBeAcid;
-                            break;
-                        case AmphotericsExperimentState.CheckingFirstTubeEnvironmentToBeAcid:
-                            amphotericsExperimentState = AmphotericsExperimentState.CheckingSecondTubeEnvironmentToBeBasic;
-                            break;
-                        case AmphotericsExperimentState.CheckingSecondTubeEnvironmentToBeBasic:
-                            amphotericsExperimentState = AmphotericsExperimentState.ExperimentFinished;
-                            break;
-                    }
-                    break;
+            case Experiment.BasicsExperiment:
+                switch (basicsExperimentState) {
+                    default: break;
+                    case BasicsExperimentState.ExperimentStarted:
+                        basicsExperimentState = BasicsExperimentState.AddingWaterToTheTube;
+                        break;
+                    case BasicsExperimentState.AddingWaterToTheTube:
+                        basicsExperimentState = BasicsExperimentState.AddingCaOToTheTube;
+                        break;
+                    case BasicsExperimentState.AddingCaOToTheTube:
+                        basicsExperimentState = BasicsExperimentState.CheckingTheEnvironment;
+                        break;
+                    case BasicsExperimentState.CheckingTheEnvironment:
+                        basicsExperimentState = BasicsExperimentState.ExperimentFinished;
+                        break;
                 }
+                break;
+            case Experiment.AmphotericsExperiment:
+                switch (amphotericsExperimentState) {
+                    default: break;
+                    case AmphotericsExperimentState.ExperimentStarted:
+                        amphotericsExperimentState = AmphotericsExperimentState.AddingNaOH;
+                        break;
+                    case AmphotericsExperimentState.AddingNaOH:
+                        amphotericsExperimentState = AmphotericsExperimentState.AddingAcidToTheFirstTube;
+                        break;
+                    case AmphotericsExperimentState.AddingAcidToTheFirstTube:
+                        amphotericsExperimentState = AmphotericsExperimentState.AddingNaOHToTheSecondTube;
+                        break;
+                    case AmphotericsExperimentState.AddingNaOHToTheSecondTube:
+                        amphotericsExperimentState = AmphotericsExperimentState.CheckingFirstTubeEnvironmentToBeAcid;
+                        break;
+                    case AmphotericsExperimentState.CheckingFirstTubeEnvironmentToBeAcid:
+                        amphotericsExperimentState = AmphotericsExperimentState.CheckingSecondTubeEnvironmentToBeBasic;
+                        break;
+                    case AmphotericsExperimentState.CheckingSecondTubeEnvironmentToBeBasic:
+                        amphotericsExperimentState = AmphotericsExperimentState.ExperimentFinished;
+                        break;
+                }
+                break;
+            case Experiment.AcidsExperiment:
+                switch (acidsExperimentState) {
+                    default: break;
+                    case AcidsExperimentState.ExperimentStarted:
+                        acidsExperimentState = AcidsExperimentState.HeatingTheSeraWithAlcoholHeater;
+                        break;
+                    case AcidsExperimentState.HeatingTheSeraWithAlcoholHeater:
+                        acidsExperimentState = AcidsExperimentState.PlacingSeraToFlaskWithO2;
+                        break;
+                    case AcidsExperimentState.PlacingSeraToFlaskWithO2:
+                        acidsExperimentState = AcidsExperimentState.AddingWaterToFlaskWithSO2;
+                        break;
+                    case AcidsExperimentState.AddingWaterToFlaskWithSO2:
+                        acidsExperimentState = AcidsExperimentState.CheckingTheEnvironmentWithMetil;
+                        break;
+                    case AcidsExperimentState.CheckingTheEnvironmentWithMetil:
+                        acidsExperimentState = AcidsExperimentState.ExperimentFinished;
+                        break;
+                }
+                break;
         }
-        //experimentHintsSO.experimentHintsList.Remove()
     }
 
     public bool IsBasicsCheckingTheEnvironmentState() {

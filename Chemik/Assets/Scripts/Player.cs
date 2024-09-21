@@ -35,7 +35,7 @@ public class Player : MonoBehaviour, IChemicalObjectParent {
         GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
         GameInput.Instance.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
 
-        controller = gameObject.GetComponent<CharacterController>();
+        controller = GetComponent<CharacterController>();
 
         cameraTransform = Camera.main.transform;
     }
@@ -48,6 +48,9 @@ public class Player : MonoBehaviour, IChemicalObjectParent {
         if (selectedObject != null) {
             if (chemicalObject != null && selectedObject.TryGetComponent<TubeHolder>(out TubeHolder tubeHolder)) {
                 tubeHolder.InteractAlternateTubeHolder(chemicalObject);
+            }
+            if (selectedObject.TryGetComponent<AlcoholHeater>(out AlcoholHeater alcoholHeater)) {
+                alcoholHeater.InteractAlternateAlcoholHeater(chemicalObject);
             }
         }
     }
@@ -69,7 +72,6 @@ public class Player : MonoBehaviour, IChemicalObjectParent {
         if (groundedPlayer && playerVelocity.y < 0) {
             playerVelocity.y = 0f;
         }
-
         Vector2 movement = GameInput.Instance.GetMoveInputVectorNormalized();
         Vector3 move = new Vector3(movement.x, 0, movement.y);
         move = cameraTransform.forward * move.z + cameraTransform.right * move.x;
