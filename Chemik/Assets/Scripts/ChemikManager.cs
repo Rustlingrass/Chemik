@@ -72,11 +72,28 @@ public class ChemikManager : MonoBehaviour {
         if (AlcoholHeater.Instance != null) {
             AlcoholHeater.Instance.OnObjectHeated += AlcoholHeater_OnObjectHeated;
         }
+        if (FlaskHolder.Instance != null) {
+            FlaskHolder.Instance.OnModelChanged += FlaskHolder_OnModelChanged;
+        }
         ToggleMouseState();
+    }
+
+    private void FlaskHolder_OnModelChanged(object sender, EventArgs e) {
+        ChangeExperimentStageState();
+        OnStateChanged?.Invoke(this, new OnStateChangedEventArgs {
+            basicsExperimentState = basicsExperimentState,
+            amphotericsExperimentState = amphotericsExperimentState,
+            acidsExperimentState = acidsExperimentState
+        });
     }
 
     private void AlcoholHeater_OnObjectHeated(object sender, EventArgs e) {
         ChangeExperimentStageState();
+        OnStateChanged?.Invoke(this, new OnStateChangedEventArgs {
+            basicsExperimentState = basicsExperimentState,
+            amphotericsExperimentState = amphotericsExperimentState,
+            acidsExperimentState = acidsExperimentState
+        });
     }
 
     private void TubeHolder_OnModelSwapped(object sender, EventArgs e) {
@@ -196,8 +213,14 @@ public class ChemikManager : MonoBehaviour {
     public BasicsExperimentState GetBasicsExperimentState() {
         return basicsExperimentState;
     }
+    public AcidsExperimentState GetAcidsExperimentState() {
+        return acidsExperimentState;
+    }
 
     public ExperimentHintsSOList GetExperimentHintsSOList() {
         return experimentHintsSOList;
+    }
+    public bool IsExperimentFinished() {
+        return basicsExperimentState == BasicsExperimentState.ExperimentFinished || acidsExperimentState == AcidsExperimentState.ExperimentFinished || amphotericsExperimentState == AmphotericsExperimentState.ExperimentFinished;
     }
 }

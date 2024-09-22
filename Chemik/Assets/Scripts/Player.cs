@@ -51,6 +51,8 @@ public class Player : MonoBehaviour, IChemicalObjectParent {
             }
             if (selectedObject.TryGetComponent<AlcoholHeater>(out AlcoholHeater alcoholHeater)) {
                 alcoholHeater.InteractAlternateAlcoholHeater(chemicalObject);
+            } else if (chemicalObject != null && selectedObject.TryGetComponent<FlaskHolder>(out FlaskHolder flaskWithO2)) {
+                flaskWithO2.InteractAlternateFlaskWithO2(chemicalObject);
             }
         }
     }

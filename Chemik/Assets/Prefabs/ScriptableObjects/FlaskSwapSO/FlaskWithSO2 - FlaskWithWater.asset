@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7629f7530ab46df44b38d04866ced346, type: 3}
+  m_Name: FlaskWithSO2 - FlaskWithWater
+  m_EditorClassIdentifier: 
+  inputChemicalObjectSO: {fileID: 11400000, guid: e924b8d1fc4b3df438804a1e57748295,
+    type: 2}
+  outputChemicalObjectSO: {fileID: 11400000, guid: 0a297757e148bc9499380aceb0c8e48b,
+    type: 2}
+  keyObjectSO: {fileID: 11400000, guid: 68f04e2c2b9c27644a307118bb762167, type: 2}

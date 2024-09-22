@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class InGameUI : MonoBehaviour
 {
     private const string IN_GAME_HINTS_UI_TASK_CLEARED = "TaskCleared";
+    private const string IN_GAME_UI_EXPERIMENT_FINISHED_MESSAGE = "ExperimentFinished";
     public static InGameUI Instance { get; private set; }
     
     [SerializeField] private GameObject inGameKeyHintsUI;
@@ -15,21 +16,22 @@ public class InGameUI : MonoBehaviour
     [SerializeField] private GameObject experimentFinishedMessageUI;
     [SerializeField] private GameObject[] inGameHintsUIArray;
     private int hintCounter = 0;
-    private Animator animator;
+    private Animator hintsUIAnimator;
+    private Animator inGameUIAnimator;
     private void Awake() {
         Instance = this;
     }
     private void Start() {
-        animator = inGameHintsUI.GetComponent<Animator>();
+        inGameUIAnimator = GetComponent<Animator>();
+        hintsUIAnimator = inGameHintsUI.GetComponent<Animator>();
         ChemikManager.Instance.OnGamePaused += ChemikManager_OnGamePaused;
         ChemikManager.Instance.OnGameUnpaused += ChemikManager_OnGameUnpaused;
         ChemikManager.Instance.OnStateChanged += ChemikManager_OnStateChanged;
-        HideFinishedMessage();
     }
 
     private void ChemikManager_OnStateChanged(object sender, ChemikManager.OnStateChangedEventArgs e) {
         ChangeHintText();
-        if (e.basicsExperimentState == ChemikManager.BasicsExperimentState.ExperimentFinished || e.amphotericsExperimentState == ChemikManager.AmphotericsExperimentState.ExperimentFinished) {
+        if (ChemikManager.Instance.IsExperimentFinished()) {
             ShowFinishedMessage();
             inGameHintsUI.SetActive(false);
         }
@@ -53,15 +55,13 @@ public class InGameUI : MonoBehaviour
     }
 
     private void ChangeHintText() {
-        animator.SetTrigger(IN_GAME_HINTS_UI_TASK_CLEARED);
+        hintsUIAnimator.SetTrigger(IN_GAME_HINTS_UI_TASK_CLEARED);
         inGameHintsUIArray[hintCounter].SetActive(false);
         hintCounter++;
     }
 
     private void ShowFinishedMessage() {
-        experimentFinishedMessageUI.SetActive(true);
-    }
-    private void HideFinishedMessage() {
-        experimentFinishedMessageUI.SetActive(false);
+        //experimentFinishedMessageUI.SetActive(true);
+        inGameUIAnimator.SetTrigger(IN_GAME_UI_EXPERIMENT_FINISHED_MESSAGE);
     }
 }

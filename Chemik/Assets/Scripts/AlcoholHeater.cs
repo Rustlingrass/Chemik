@@ -23,7 +23,7 @@ public class AlcoholHeater : ChemicalObject, IChemicalObjectParent
     private ChemicalObject currentChemicalObject;
     private Animator animator;
 
-    private float heatingTimerMax = 10.0f;
+    private float heatingTimerMax = 5.0f;
     private float heatingTimer = 0f;
     private void Awake() {
         Instance = this;
@@ -48,12 +48,14 @@ public class AlcoholHeater : ChemicalObject, IChemicalObjectParent
     }
 
     public void InteractAlternateAlcoholHeater(ChemicalObject chemicalObject) {
-        if (chemicalObject?.GetChemicalObjectSO() == keyChemicalObjectSO && state == HeatingState.NotHeating) {
+        if (chemicalObject?.GetChemicalObjectSO() == keyChemicalObjectSO && state == HeatingState.NotHeating && ChemikManager.Instance.GetAcidsExperimentState() == ChemikManager.AcidsExperimentState.HeatingTheSeraWithAlcoholHeater) {
             chemicalObject.SetChemicalObjectParent(this);
             state = HeatingState.Heating;
             alcoholHeaterLid.SetActive(false);
             alcoholHeaterPerticlesHolder.SetActive(true);
+            currentChemicalObject.gameObject.layer = 0; //default layer
         } else if (chemicalObject == null && state == HeatingState.Heated) {
+            currentChemicalObject.gameObject.layer = 7; //intaractable1 layer
             currentChemicalObject.SetChemicalObjectParent(Player.Instance);
             alcoholHeaterPerticlesHolder.SetActive(false);
             alcoholHeaterLid.SetActive(true);
