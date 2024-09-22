@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AlcoholHeater : ChemicalObject, IChemicalObjectParent
+public class AlcoholHeater : ChemicalObject, IChemicalObjectParent, IHasProgress
 {
     public static AlcoholHeater Instance {  get; private set; }
 
     public event EventHandler OnObjectHeated;
-    
+    public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
+
     [SerializeField] private ChemicalObjectSO keyChemicalObjectSO;
     [SerializeField] private GameObject ironSpoonHolder;
     [SerializeField] private GameObject alcoholHeaterLid;
@@ -41,6 +42,9 @@ public class AlcoholHeater : ChemicalObject, IChemicalObjectParent
                 Debug.Log("Heated!");
                 OnObjectHeated?.Invoke(this, EventArgs.Empty);
             }
+            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
+                progressNormalized = heatingTimer / heatingTimerMax
+            });
         }
     }
     public override void SetChemicalObjectParent(IChemicalObjectParent chemicalObjectParent) {

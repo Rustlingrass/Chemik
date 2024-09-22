@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlaskHolder : Flask, IChemicalObjectParent
+public class FlaskHolder : Flask, IChemicalObjectParent, IHasProgress
 {
     public static FlaskHolder Instance { get; private set; }
     public event EventHandler OnModelChanged;
+    public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
 
     [SerializeField] FlaskSwapSO[] flaskSwapSOArray;
     [SerializeField] ChemicalObjectSO heatedSpoonSO;
@@ -37,6 +38,9 @@ public class FlaskHolder : Flask, IChemicalObjectParent
                 reactedSpoonHolder.SetActive(true);
                 OnModelChanged?.Invoke(this, EventArgs.Empty);
             }
+            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
+                progressNormalized = seraReactionTimer / seraReactionTimerMax
+            });
         }
     }
 
