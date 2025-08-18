@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ public class InGameUI : MonoBehaviour
     [SerializeField] private GameObject inGameHintsUI;
     [SerializeField] private GameObject experimentFinishedMessageUI;
     [SerializeField] private GameObject[] inGameHintsUIArray;
+    [SerializeField] private CinemachineVirtualCamera virtualCamera;
     private int hintCounter = 0;
     private Animator hintsUIAnimator;
     private Animator inGameUIAnimator;
@@ -63,5 +65,8 @@ public class InGameUI : MonoBehaviour
     private void ShowFinishedMessage() {
         //experimentFinishedMessageUI.SetActive(true);
         inGameUIAnimator.SetTrigger(IN_GAME_UI_EXPERIMENT_FINISHED_MESSAGE);
+        ChemikManager.Instance.ToggleMouseState();
+        GameInput.Instance.DisablePlayerInput();
+        virtualCamera.enabled = false;
     }
 }

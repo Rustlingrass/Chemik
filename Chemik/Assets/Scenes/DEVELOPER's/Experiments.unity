@@ -1493,6 +1493,7 @@ MonoBehaviour:
   experimentHintsSOList: {fileID: 11400000, guid: 95c5de21560c58649aed61029a740405,
     type: 2}
   basicsExperimentState: 0
+  acidsExperimentState: 0
   amphotericsExperimentState: 0
   experimentName: 0
 --- !u!4 &2143924623
@@ -1594,7 +1595,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 2143924623}
   - {fileID: 1260180048}
-  - {fileID: 856082050}
   - {fileID: 1496010247}
   - {fileID: 99240649}
   - {fileID: 1816866986027149707}
@@ -1603,3 +1603,4 @@ SceneRoots:
   - {fileID: 578856261}
   - {fileID: 1843962783}
   - {fileID: 2079508488}
+  - {fileID: 856082050}

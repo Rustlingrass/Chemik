@@ -111,16 +111,20 @@ public class ChemikManager : MonoBehaviour {
         TogglePauseGame();
     }
 
-    public void TogglePauseGame() {
-        isGamePaused = !isGamePaused;
-        if (isGamePaused) {
-            Time.timeScale = 0f;
+    public void TogglePauseGame(bool finalPause = false) {
+        if (finalPause == false) {
+            isGamePaused = !isGamePaused;
+            if (isGamePaused) {
+                Time.timeScale = 0f;
 
-            OnGamePaused?.Invoke(this, EventArgs.Empty);
+                OnGamePaused?.Invoke(this, EventArgs.Empty);
+            } else {
+                Time.timeScale = 1f;
+
+                OnGameUnpaused?.Invoke(this, EventArgs.Empty);
+            }
         } else {
-            Time.timeScale = 1f;
-
-            OnGameUnpaused?.Invoke(this, EventArgs.Empty);
+            
         }
     }
     public void ToggleMouseState() {

@@ -56,4 +56,7 @@ public class GameInput : MonoBehaviour {
         lookInputVector.Normalize();
         return lookInputVector;
     }
+    public void DisablePlayerInput() {
+        playerInputActions.Player.Disable();
+    }
 }
